@@ -8,7 +8,6 @@ export const ContainerProfile = styled.div`
 `
 export const BoxProfile = styled.div`
     width: 100%;
-    max-width: 864px;
     padding: 2rem;
     display: grid;
     grid-template-columns:  180px auto;
