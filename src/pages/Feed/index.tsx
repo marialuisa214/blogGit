@@ -1,5 +1,7 @@
+import { Profile } from "../../components/Profile";
+
 export function Feed(){
     return(
-        <h1>Feed</h1>
+        <Profile />
     )
 }
