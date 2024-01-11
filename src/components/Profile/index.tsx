@@ -1,26 +1,64 @@
 import { ArrowSquareOut, Buildings, GithubLogo, Users } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
 import { BoxProfile, ContainerProfile, Description, ExtraInformations, InfoBasicInformations } from "./styles";
+import { useEffect, useState } from "react";
+
+interface ProfileInfo {
+    name: string;
+    avatar_url: string;
+    bio: string;
+    followers: number;
+    company: string;
+    html_url: string;
+
+}
+
+
 
  export function Profile() {
     const theme = useTheme();
+
+    const [ profile, setProfile] = useState<ProfileInfo>()
+
+    async function loadProfile() {
+
+        const response = await fetch('https://api.github.com/users/marialuisa214')
+
+        const data = await response.json()
+        const user: ProfileInfo = {
+            name: data.name,
+            avatar_url: data.avatar_url,
+            bio: data.bio,
+            followers: data.followers,
+            company: data.company,
+            html_url: data.html_url
+        }
+
+        setProfile(user)
+    }
+
+    useEffect(() => {
+        loadProfile()
+    }, [])
+    
+
     return (
         <ContainerProfile> 
             <BoxProfile>
                 <section >
-                    <img src="https://avatars.githubusercontent.com/u/91849929?s=400&u=ded66ccb8bc2857c99ebbdc069714acb0d80f19f&v=4" alt="" />
+                    <img src={profile?.avatar_url} alt="" />
                 </section>
 
                 <div> 
                     <InfoBasicInformations> 
-                        <h1>Nome</h1>
+                        <h1>{profile?.name}</h1>
                         <button>
                             <span>GITHUB</span>
                             <ArrowSquareOut size={25} color={theme['blue']} />
                         </button>
                     </InfoBasicInformations>
 
-                    <Description>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti dolorum sequi enim provident quisquam cum tempora dolor reiciendis officia! Unde, labore! Veritatis perspiciatis, sapiente pariatur debitis quisquam voluptatem est necessitatibus?</Description>
+                    <Description>{profile?.bio}</Description>
 
                     <ExtraInformations>
                         <div>
@@ -29,10 +67,10 @@ import { BoxProfile, ContainerProfile, Description, ExtraInformations, InfoBasic
                         </div>
                         <div>
                             <Buildings size={20} color={theme['blue']} weight="fill" />
-                            <label>trabalho</label>
+                            <label>{profile?.company}</label>
                         </div>
                         <div>
-                            <Users size={20} color={theme['blue']} weight="fill" /> <label>Seguindo</label>
+                            <Users size={20} color={theme['blue']} weight="fill" /> <label>{profile?.followers} Seguidores</label>
                         </div>
                     </ExtraInformations>
                 </div>
