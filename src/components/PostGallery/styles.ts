@@ -6,10 +6,9 @@ export const PostGalleryContainer = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
 
-
 `
 
-export const PostContext = styled.div`
+export const PostContent = styled.div`
 display: flex;
 flex-direction: column;
 gap: 1rem;
@@ -32,8 +31,6 @@ p {
     text-align: justify;
 
 }
-
-
 `
 export const PostInfoBasic = styled.div`
     display: flex;
