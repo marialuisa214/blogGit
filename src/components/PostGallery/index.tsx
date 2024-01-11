@@ -1,20 +1,51 @@
+import { useEffect, useState } from "react";
 import { PostContext, PostGalleryContainer, PostInfoBasic } from "./styles";
 
-export function PostGallery() {
 
-    const array = [1,2,3,4,5,6,7,8,9,10]
+interface PostInfo {
+    title: string,
+    body: string,
+    created_at: string,
+    comments: number,
+    html_url: string
+    
+}
+
+export function PostGallery() {
+    const [posts, setPosts] = useState<PostInfo[]>([])
+
+    async function loadPosts() {
+        const response = await fetch('https://api.github.com/search/issues?q=Boas%20pr%C3%A1ticas%20repo:rocketseat-education/reactjs-github-blog-challenge')
+        const data = await response.json()
+
+        const allPosts = await data.items.map((post: PostInfo) => {
+            return {
+                title: post.title,
+                body: post.body,
+                created_at: post.created_at,
+                comments: post.comments,
+                html_url: post.html_url
+            }
+        })
+        setPosts(allPosts)
+    }
+
+    useEffect(() => {
+        loadPosts()
+    })
+
     return (
         <PostGalleryContainer>
 
-            {array.map(() => {
+            {posts.map((post: PostInfo) => {
                 return(
                     <PostContext>
                         <PostInfoBasic>
-                            <strong>Post</strong>
-                            <span>time</span>
+                            <strong>{post.title}</strong>
+                            <span>{post.created_at}</span>
                         </PostInfoBasic>
             
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus libero impedit quas excepturi optio, illum similique dignissimos ratione molestiae alias debitis exercitationem commodi iure ipsum atque asperiores perspiciatis laboriosam? Similique.</p>
+                        <p>{post.body}</p>
                     </PostContext>
                 )
             })}

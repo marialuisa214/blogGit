@@ -10,6 +10,7 @@ interface ProfileInfo {
     followers: number;
     company: string;
     html_url: string;
+    public_repos: number;
 
 }
 
@@ -29,7 +30,9 @@ interface ProfileInfo {
             bio: data.bio,
             followers: data.followers,
             company: data.company,
-            html_url: data.html_url
+            html_url: data.html_url,
+             public_repos: data.public_repos
+
         }
 
         setProfile(user)
@@ -64,15 +67,15 @@ interface ProfileInfo {
 
                     <ExtraInformations>
                         <div>
-                            <GithubLogo size={20} color={theme['blue']} weight="fill" />
-                            <label>Repositórios</label>
+                            <GithubLogo size={17} color={theme['blue']} weight="fill" />
+                            <label>{profile?.public_repos} Repositórios</label>
                         </div>
                         <div>
-                            <Buildings size={20} color={theme['blue']} weight="fill" />
+                            <Buildings size={17} color={theme['blue']} weight="fill" />
                             <label>{profile?.company}</label>
                         </div>
                         <div>
-                            <Users size={20} color={theme['blue']} weight="fill" /> <label>{profile?.followers} Seguidores</label>
+                            <Users size={17} color={theme['blue']} weight="fill" /> <label>{profile?.followers} Seguidores</label>
                         </div>
                     </ExtraInformations>
                 </BoxInfoProfile>

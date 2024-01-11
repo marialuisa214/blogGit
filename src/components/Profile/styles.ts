@@ -4,10 +4,14 @@ export const ContainerProfile = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 864px;
+    max-width: 864px;
+
 
 `
 export const BoxProfile = styled.div`
     width: 100%;
+    max-width: 864px;
     padding: 2rem;
     display: grid;
     grid-template-columns:  180px auto;
@@ -88,7 +92,7 @@ export const ExtraInformations = styled.div`
     align-items: center;
     justify-content: start;
 
-        margin-top: 1rem;
+    margin-top: 1rem;
     gap: 2rem;
 
     div {
@@ -99,6 +103,7 @@ export const ExtraInformations = styled.div`
 
         color: ${(props) => props.theme['base-label']};
         font-family: 'Nunito', sans-serif;
+        font-size: 0.8rem;
         gap: 0.5rem;
     }
 
