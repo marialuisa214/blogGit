@@ -28,16 +28,25 @@ export const BoxProfile = styled.div`
     }
 `
 
+export const BoxInfoProfile = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    
+`
+
+
 export const InfoBasicInformations = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    font-family: 'Nunito', sans-serif;
      
     h1 {
         color: ${(props) => props.theme['base-title']};
         font-size: 2rem;
-        font-family: 'Nunito', sans-serif;
         
     }
 
@@ -50,13 +59,17 @@ export const InfoBasicInformations = styled.div`
 
         background: transparent;
         border: none;
-        
 
         color: ${(props) => props.theme['blue']};
-
+        cursor: pointer;
         svg {
             line-height: 0;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+        }
+        
+        &:hover {
+            filter: brightness(0.8);
+            transition: 0.2s;
         }
 
     }
@@ -67,7 +80,6 @@ export const Description = styled.p`
     color: ${(props) => props.theme['base-text']};
     font-size: 1rem;
     font-family: 'Nunito', sans-serif;
-    margin-top: 1rem;
 `
 
 export const ExtraInformations = styled.div`

@@ -1,6 +1,6 @@
 import { ArrowSquareOut, Buildings, GithubLogo, Users } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
-import { BoxProfile, ContainerProfile, Description, ExtraInformations, InfoBasicInformations } from "./styles";
+import { BoxInfoProfile, BoxProfile, ContainerProfile, Description, ExtraInformations, InfoBasicInformations } from "./styles";
 import { useEffect, useState } from "react";
 
 interface ProfileInfo {
@@ -12,8 +12,6 @@ interface ProfileInfo {
     html_url: string;
 
 }
-
-
 
  export function Profile() {
     const theme = useTheme();
@@ -40,6 +38,10 @@ interface ProfileInfo {
     useEffect(() => {
         loadProfile()
     }, [])
+
+    function handleOpenUSerGit() {
+        window.open(profile?.html_url)
+    }
     
 
     return (
@@ -49,12 +51,12 @@ interface ProfileInfo {
                     <img src={profile?.avatar_url} alt="" />
                 </section>
 
-                <div> 
+                <BoxInfoProfile> 
                     <InfoBasicInformations> 
                         <h1>{profile?.name}</h1>
-                        <button>
+                        <button onClick={() => handleOpenUSerGit()}>
                             <span>GITHUB</span>
-                            <ArrowSquareOut size={25} color={theme['blue']} />
+                            <ArrowSquareOut size={20} color={theme['blue']} />
                         </button>
                     </InfoBasicInformations>
 
@@ -73,7 +75,7 @@ interface ProfileInfo {
                             <Users size={20} color={theme['blue']} weight="fill" /> <label>{profile?.followers} Seguidores</label>
                         </div>
                     </ExtraInformations>
-                </div>
+                </BoxInfoProfile>
             </BoxProfile>
         </ContainerProfile>
     )
