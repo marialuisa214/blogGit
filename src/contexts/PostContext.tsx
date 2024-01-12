@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react"
 
 
 interface PostInfo {
+    id: number,
     title: string,
     body: string,
     created_at: string,
@@ -41,6 +42,7 @@ export function PostProvider({children}: TransactionsProviderProps){
             const dataPost = {
                 allPosts: data.items.map((post: PostInfo) => {
                     return {
+                        id: post.id,
                         title: post.title,
                         body: post.body,
                         created_at: post.created_at,
@@ -56,9 +58,12 @@ export function PostProvider({children}: TransactionsProviderProps){
             const response = await fetch('https://api.github.com/search/issues?q=%20repo:rocketseat-education/reactjs-github-blog-challenge')
 
         const data = await response.json()
+
+        console.log(data)
         const dataPost = {
             allPosts: data.items.map((post: PostInfo) => {
                 return {
+                    id: post.id,
                     title: post.title,
                     body: post.body,
                     created_at: post.created_at,
@@ -69,6 +74,7 @@ export function PostProvider({children}: TransactionsProviderProps){
             totalCount: data.total_count
         }
         setPosts(dataPost)
+        console.log(dataPost)
 
 
         }

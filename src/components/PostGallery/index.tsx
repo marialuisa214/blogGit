@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 
 
 interface PostInfo {
+    id: number,
     title: string,
     body: string,
     created_at: string,
@@ -20,7 +21,7 @@ export function PostGallery() {
         <PostGalleryContainer>
             {dataPost.allPosts.map((post: PostInfo) => {
                 return(
-                    <NavLink to="/post" title={post.title}>
+                    <NavLink to={"/post/" + post.id.toString()} title={post.title}>
                         <PostContent>
                             <PostInfoBasic>
                                 <strong>{post.title}</strong>
