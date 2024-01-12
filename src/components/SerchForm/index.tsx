@@ -13,7 +13,6 @@ export function SearchForm(){
       
           timeout = setTimeout(() => {
             fechPost(event.target.value)
-            console.log(event.target.value)
             timeout = undefined;
           }, 300);
     }

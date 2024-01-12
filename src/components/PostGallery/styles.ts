@@ -4,8 +4,13 @@ export const PostGalleryContainer = styled.div`
     max-width: 864px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-
+    gap: 2rem; 
+    
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    
 `
 
 export const PostContent = styled.div`
@@ -13,11 +18,11 @@ display: flex;
 flex-direction: column;
 gap: 1rem;
 
-max-height: 300px;
 max-width: 416px; // 864/2 - 2rem = 416px //1rem = 16px 
 
 padding: 2rem;
 border-radius: 10px;
+height: 300px;
 
 background: ${(props) => props.theme['base-post']};
 font-family: 'Nunito', sans-serif;

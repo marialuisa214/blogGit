@@ -38,9 +38,6 @@ export function PostProvider({children}: TransactionsProviderProps){
             const response = await fetch(`https://api.github.com/search/issues?q=${query}%20repo:rocketseat-education/reactjs-github-blog-challenge`)
 
             const data = await response.json()
-
-            console.log(data)
-    
             const dataPost = {
                 allPosts: data.items.map((post: PostInfo) => {
                     return {
@@ -59,9 +56,6 @@ export function PostProvider({children}: TransactionsProviderProps){
             const response = await fetch('https://api.github.com/search/issues?q=%20repo:rocketseat-education/reactjs-github-blog-challenge')
 
         const data = await response.json()
-
-        console.log(data)
-
         const dataPost = {
             allPosts: data.items.map((post: PostInfo) => {
                 return {

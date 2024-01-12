@@ -2,6 +2,7 @@
 import { PostContent, PostGalleryContainer, PostInfoBasic } from "./styles";
 import { PostContext } from "../../contexts/PostContext";
 import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 
 
 interface PostInfo {
@@ -17,17 +18,18 @@ export function PostGallery() {
     const {dataPost} = useContext(PostContext)
     return (
         <PostGalleryContainer>
-
             {dataPost.allPosts.map((post: PostInfo) => {
                 return(
-                    <PostContent>
-                        <PostInfoBasic>
-                            <strong>{post.title}</strong>
-                            <span>{post.created_at}</span>
-                        </PostInfoBasic>
-            
-                        <p>{post.body}</p>
-                    </PostContent>
+                    <NavLink to="/post" title={post.title}>
+                        <PostContent>
+                            <PostInfoBasic>
+                                <strong>{post.title}</strong>
+                                <span>{post.created_at}</span>
+                            </PostInfoBasic>
+                
+                            <p>{post.body}</p>
+                        </PostContent>
+                    </NavLink>
                 )
             })}
         </PostGalleryContainer>
