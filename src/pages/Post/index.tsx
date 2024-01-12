@@ -22,7 +22,9 @@ export function Post() {
     const {dataPost} = useContext(PostContext)
 
     const {id} = useParams()
+    
 
+    console.log({id, dataPost})
     const post = dataPost.allPosts.filter((post: PostInfo) => {
         return post.id === Number(id)
 
@@ -45,7 +47,7 @@ export function Post() {
                 </button>
             </ButtonContainer>
 
-            <h1>{post[0].title}</h1>
+            <h1>{post[0]?.title}</h1>
 
             <ExtraInformations>
                 <div>
@@ -55,17 +57,17 @@ export function Post() {
 
                 <div>
                     <Calendar size={20} color={theme['blue']} weight="fill" />
-                    <label>{post[0].created_at}</label>
+                    <label>{post[0]?.created_at}</label>
                 </div>
                 <div>
                     <ChatCircle size={20} color={theme['blue']} weight="fill" />
-                    <label>{post[0].comments} comentarios</label>
+                    <label>{post[0]?.comments} comentarios</label>
                 </div>
             </ExtraInformations>
             </BoxInfoPost>
 
             <ContentPost>
-                <p>{post[0].body}</p>
+                <p>{post[0]?.body}</p>
 
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium modi itaque temporibus! Cumque amet, saepe perspiciatis placeat a nihil quo nostrum ab mollitia dolorum molestiae, veniam ex quod, totam blanditiis?</p>
 

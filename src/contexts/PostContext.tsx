@@ -74,7 +74,7 @@ export function PostProvider({children}: TransactionsProviderProps){
             totalCount: data.total_count
         }
         setPosts(dataPost)
-        console.log(dataPost)
+        console.log("ai papaiiiii")
 
 
         }
