@@ -14,11 +14,11 @@ interface PostInfo {
 }
 
 export function PostGallery() {
-    const {posts} = useContext(PostContext)
+    const {dataPost} = useContext(PostContext)
     return (
         <PostGalleryContainer>
 
-            {posts.map((post: PostInfo) => {
+            {dataPost.allPosts.map((post: PostInfo) => {
                 return(
                     <PostContent>
                         <PostInfoBasic>

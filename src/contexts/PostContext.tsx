@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 
+
 interface PostInfo {
     title: string,
     body: string,
@@ -9,9 +10,13 @@ interface PostInfo {
     
 }
 
+interface DataPost {
+    allPosts: PostInfo[],
+    totalCount: number;
+}
 
 interface PostsContextType {
-    posts: PostInfo[]
+    dataPost: DataPost
     fechPost: (query?:string) => (Promise<void> )// função assicrona(Promise) sem nenhum retorno
     // createTransaction: (data: TransactionInputForm) => Promise<void>
 }
@@ -25,42 +30,52 @@ export const PostContext = createContext({} as PostsContextType)
 
 export function PostProvider({children}: TransactionsProviderProps){
 
-    const [posts, setPosts] = useState<PostInfo[]>([])
+    const [posts, setPosts] = useState<DataPost>({allPosts: [], totalCount: 0})
 
     async function loadPosts(query?:string | undefined) {
         
         if(query){
             const response = await fetch(`https://api.github.com/search/issues?q=${query}%20repo:rocketseat-education/reactjs-github-blog-challenge`)
 
-        const data = await response.json()
+            const data = await response.json()
 
-        const allPosts = await data.items.map((post: PostInfo) => {
-            return {
-                title: post.title,
-                body: post.body,
-                created_at: post.created_at,
-                comments: post.comments,
-                html_url: post.html_url
+            console.log(data)
+    
+            const dataPost = {
+                allPosts: data.items.map((post: PostInfo) => {
+                    return {
+                        title: post.title,
+                        body: post.body,
+                        created_at: post.created_at,
+                        comments: post.comments,
+                        html_url: post.html_url
+                    };
+                }),
+                totalCount: data.total_count
             }
-        })
-        setPosts(allPosts)
-
+            setPosts(dataPost)
         }
         else{
             const response = await fetch('https://api.github.com/search/issues?q=%20repo:rocketseat-education/reactjs-github-blog-challenge')
 
         const data = await response.json()
 
-        const allPosts = await data.items.map((post: PostInfo) => {
-            return {
-                title: post.title,
-                body: post.body,
-                created_at: post.created_at,
-                comments: post.comments,
-                html_url: post.html_url
-            }
-        })
-        setPosts(allPosts)
+        console.log(data)
+
+        const dataPost = {
+            allPosts: data.items.map((post: PostInfo) => {
+                return {
+                    title: post.title,
+                    body: post.body,
+                    created_at: post.created_at,
+                    comments: post.comments,
+                    html_url: post.html_url
+                };
+            }),
+            totalCount: data.total_count
+        }
+        setPosts(dataPost)
+
 
         }
 
@@ -74,7 +89,7 @@ export function PostProvider({children}: TransactionsProviderProps){
     return (
         <PostContext.Provider 
             value={{
-                posts,
+                dataPost: posts,
                 fechPost: loadPosts
                 }}
         >

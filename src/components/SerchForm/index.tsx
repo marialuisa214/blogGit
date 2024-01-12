@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { PostContext } from "../../contexts/PostContext";
 
 export function SearchForm(){
-    const {fechPost} = useContext(PostContext)
+    const {dataPost, fechPost} = useContext(PostContext)
 
     let timeout: number | undefined;
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -23,7 +23,7 @@ export function SearchForm(){
     <SearchFormContainer onSubmit={() => {return "oi"}} >
         <SearchFormInfo>
             <strong>Publicações</strong>
-            <span>7 publicações</span>
+            <span>{dataPost.totalCount} pulicações</span>
 
         </SearchFormInfo>
         <SearchFormInput 
