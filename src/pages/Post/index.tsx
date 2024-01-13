@@ -1,9 +1,10 @@
 import { ArrowSquareOut, Calendar, CaretLeft, ChatCircle, GithubLogo } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
-import { BoxInfoPost, ButtonContainer, ContainerPost, ContentPost, ExtraInformations } from "./styles";
+import { BoxInfoPost, ButtonContainer, ContainerPost, ExtraInformations } from "./styles";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { PostContext } from "../../contexts/PostContext";
+import { ContentPostInfo } from "../../components/ContentPost";
 // import { useParams } from "react-router-dom";
 // import { useContext } from "react";
 // import { PostContext } from "../../contexts/PostContext";
@@ -29,7 +30,7 @@ export function Post() {
         return post.id === Number(id)
 
     })
-    console.log(post)
+    const markdown = post[0]?.body;
 
     return(
         <ContainerPost>
@@ -66,13 +67,8 @@ export function Post() {
             </ExtraInformations>
             </BoxInfoPost>
 
-            <ContentPost>
-                <p>{post[0]?.body}</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium modi itaque temporibus! Cumque amet, saepe perspiciatis placeat a nihil quo nostrum ab mollitia dolorum molestiae, veniam ex quod, totam blanditiis?</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium modi itaque temporibus! Cumque amet, saepe perspiciatis placeat a nihil quo nostrum ab mollitia dolorum molestiae, veniam ex quod, totam blanditiis?</p>
-            </ContentPost>
+            <ContentPostInfo body={markdown}></ContentPostInfo>
+            
         </ContainerPost>
         
     )
