@@ -1,7 +1,7 @@
 import { ArrowSquareOut, Calendar, CaretLeft, ChatCircle, GithubLogo } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
 import { BoxInfoPost, ButtonContainer, ContainerPost, ExtraInformations } from "./styles";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { PostContext } from "../../contexts/PostContext";
 import { ContentPostInfo } from "../../components/ContentPost";
@@ -32,17 +32,22 @@ export function Post() {
     })
     const markdown = post[0]?.body;
 
+    function handleOpenUPostGit() {
+        window.open(post[0]?.html_url)
+    }
+    const navigate = useNavigate();
+
     return(
         <ContainerPost>
             <BoxInfoPost>
 
             <ButtonContainer>
-                <button>
+                <button onClick={() => navigate(-1)}>
                     <CaretLeft size={16} color={theme['blue']} />
                     VOLTAR
                 </button>
 
-                <button>
+                <button onClick={() => handleOpenUPostGit()}>
                     <span>VER NO GITHUB</span>
                     <ArrowSquareOut size={17} color={theme['blue']} />
                 </button>
